@@ -1,0 +1,11 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main circle with yellow background -->
+  <circle cx="22" cy="22" r="22" fill="#F5C04A"/>
+  <!-- Dark blue overlay on right side using clip path -->
+  <clipPath id="rightClip">
+    <circle cx="22" cy="22" r="22"/>
+  </clipPath>
+  <rect x="22" y="0" width="22" height="44" fill="#fff" clip-path="url(#rightClip)"/>
+  <!-- Small dot in bottom right -->
+  <circle cx="44" cy="40" r="4" fill="#fff"/>
+</svg>
