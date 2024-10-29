@@ -1,8 +1,8 @@
-import Image from 'next/image';
-import tsIcon from '../public/ts-icon.png';
-import chromeIcon from '../public/chrome-icon.png';
-import braveIcon from '../public/brave-icon.png';
-import youtubeIcon from '../public/youtube-icon.png';
+import Image from "next/image";
+import tsIcon from "../public/ts-icon.png";
+import chromeIcon from "../public/chrome-icon.png";
+import braveIcon from "../public/brave-icon.png";
+import youtubeIcon from "../public/youtube-icon.png";
 
 function Home() {
   return (
@@ -19,10 +19,14 @@ function Home() {
       </div>
       <div className="text-center font-light max-w-[80ch]">
         <h5 className="mt-12 text-lg">
-          Welcome to a unique platform designed to give you a personal, private space on the internet — completely free from outside influence, corporate agendas, social media noise, and ads. Here, your content and interests take center stage.
+          Welcome to a unique platform designed to give you a personal, private
+          space on the internet — completely free from outside influence,
+          corporate agendas, social media noise, and ads. Here, your content and
+          interests take center stage.
         </h5>
         <h5 className="mt-8 text-lg">
-          Above all, <b>.truespace</b> is secure and private. Your data is yours alone, with full control to manage and delete it at any time.
+          Above all, <b>.truespace</b> is secure and private. Your data is yours
+          alone, with full control to manage and delete it at any time.
         </h5>
       </div>
       <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 mt-16">
@@ -32,7 +36,7 @@ function Home() {
             target="_blank"
           >
             <h2 className="mb-3 text-2xl font-semibold">
-              Let's go{" "}
+              Let&apos;s go{" "}
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                 -&gt;
               </span>
@@ -48,20 +52,12 @@ function Home() {
                 height={24}
                 className="mr-2"
               />
-              <Image
-                src={braveIcon}
-                alt="Brave Icon"
-                width={24}
-                height={24}
-              />
+              <Image src={braveIcon} alt="Brave Icon" width={24} height={24} />
             </div>
           </a>
         </div>
         <div className="group rounded-lg border px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
-          <a
-            href="https://www.youtube.com/watch?v=qwJwp0Vu0jk"
-            target="_blank"
-          >
+          <a href="https://www.youtube.com/watch?v=qwJwp0Vu0jk" target="_blank">
             <h2 className="mb-3 text-2xl font-semibold">
               Watch{" "}
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
