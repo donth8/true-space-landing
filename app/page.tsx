@@ -7,15 +7,17 @@ import youtubeIcon from "../public/youtube-icon.png";
 function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-white text-gray-800">
-      <div className="flex items-center mb-8">
-        <Image
-          src={tsIcon}
-          alt=".truespace Icon"
-          width={50}
-          height={50}
-          className="mr-2"
-        />
-        <h1 className="text-4xl font-bold">truespace</h1>
+      <div className="flex flex-col items-center mb-8">
+        <div className="flex items-center justify-center mb-4">
+          <Image
+            src={tsIcon}
+            alt=".truespace Icon"
+            width={50}
+            height={50}
+            className="mr-2"
+          />
+          <h1 className="text-4xl font-bold">truespace</h1>
+        </div>
       </div>
       <div className="text-center font-light max-w-[80ch]">
         <h5 className="mt-12 text-lg">
