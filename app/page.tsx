@@ -37,12 +37,7 @@ function Home() {
             href="https://chromewebstore.google.com/detail/truespace/bflicohjlcnnopbpbofikndjgphdacmb?authuser=0&hl=en-GB"
             target="_blank"
           >
-            <h2 className="mb-3 text-2xl font-semibold">
-              Let&apos;s go{" "}
-              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                -&gt;
-              </span>
-            </h2>
+            <h2 className="mb-3 text-2xl font-semibold">Browser extension</h2>
             <p className="m-0 max-w-[30ch] text-sm opacity-50">
               Download the browser extension.
             </p>
@@ -60,12 +55,7 @@ function Home() {
         </div>
         <div className="group rounded-lg border px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
           <a href="https://www.youtube.com/watch?v=qwJwp0Vu0jk" target="_blank">
-            <h2 className="mb-3 text-2xl font-semibold">
-              Watch{" "}
-              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                -&gt;
-              </span>
-            </h2>
+            <h2 className="mb-3 text-2xl font-semibold">Watch tutorial</h2>
             <p className="m-0 max-w-[30ch] text-sm opacity-50">
               Watch installation guide YouTube video.
             </p>
@@ -80,6 +70,25 @@ function Home() {
             </div>
           </a>
         </div>
+        <div className="group rounded-lg border px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
+          <a href="https://www.youtube.com/watch?v=qwJwp0Vu0jk" target="_blank">
+            <h2 className="mb-3 text-2xl font-semibold">Mobile app</h2>
+            <p className="m-0 max-w-[30ch] text-sm opacity-50">
+              Our mobile app is comming soon to iOS and Android devices.
+            </p>
+            <div className="flex items-center mt-4"></div>
+          </a>
+        </div>
+      </div>
+
+      <div className="mt-8 text-center font-light max-w-[80ch]">
+        If you have any questions, feel free to reach out on{" "}
+        <a
+          href="mailto:contact@truespace.app"
+          className="text-blue-500 hover:underline"
+        >
+          contact@truespace.app
+        </a>
       </div>
     </main>
   );
