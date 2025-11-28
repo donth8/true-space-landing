@@ -1,97 +1,944 @@
+"use client";
+
 import Image from "next/image";
-import tsIcon from "../public/ts-icon.png";
-import chromeIcon from "../public/chrome-icon.png";
-import braveIcon from "../public/brave-icon.png";
-import youtubeIcon from "../public/youtube-icon.png";
+import { useEffect, useRef, useState } from "react";
 
-function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-white text-gray-800">
-      <div className="flex flex-col items-center mb-8">
-        <div className="flex items-center justify-center mb-4">
-          <Image
-            src={tsIcon}
-            alt=".truespace Icon"
-            width={50}
-            height={50}
-            className="mr-2"
-          />
-          <h1 className="text-4xl font-bold">truespace</h1>
-        </div>
-      </div>
-      <div className="text-center font-light max-w-[80ch]">
-        <h5 className="mt-12 text-lg">
-          Welcome to a unique platform designed to give you a personal, private
-          space on the internet — completely free from outside influence,
-          corporate agendas, social media noise, and ads. Here, your content and
-          interests take center stage.
-        </h5>
-        <h5 className="mt-8 text-lg">
-          Above all, <b>.truespace</b> is secure and private. Your data is yours
-          alone, with full control to manage and delete it at any time.
-        </h5>
-      </div>
-      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 mt-16">
-        <div className="group rounded-lg border px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
-          <a
-            href="https://chromewebstore.google.com/detail/truespace/bflicohjlcnnopbpbofikndjgphdacmb?authuser=0&hl=en-GB"
-            target="_blank"
+// Truespace Logo SVG Component
+const TruespaceLogo = ({
+  className = "",
+  size = 32,
+}: {
+  className?: string;
+  size?: number;
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 52 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <defs>
+      <clipPath id="rightClip">
+        <circle cx="22" cy="22" r="22" />
+      </clipPath>
+    </defs>
+    <circle cx="22" cy="22" r="22" fill="#F5C04A" />
+    <rect
+      x="30"
+      y="0"
+      width="14"
+      height="44"
+      fill="#fff"
+      clipPath="url(#rightClip)"
+    />
+    <circle cx="48" cy="44" r="4" fill="#fff" />
+  </svg>
+);
+
+// SVG Icons as components
+const UserIcon = () => (
+  <svg
+    className="w-8 h-8"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+    />
+  </svg>
+);
+
+const BreakFreeIcon = () => (
+  <svg
+    className="w-8 h-8"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+    />
+  </svg>
+);
+
+const SparklesIcon = () => (
+  <svg
+    className="w-8 h-8"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"
+    />
+  </svg>
+);
+
+const LockIcon = () => (
+  <svg
+    className="w-8 h-8"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+    />
+  </svg>
+);
+
+const RefreshIcon = () => (
+  <svg
+    className="w-8 h-8"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+    />
+  </svg>
+);
+
+const ClockIcon = () => (
+  <svg
+    className="w-8 h-8"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+    />
+  </svg>
+);
+
+const ChevronIcon = ({ isOpen }: { isOpen: boolean }) => (
+  <svg
+    className={`w-5 h-5 transition-transform duration-300 ${
+      isOpen ? "rotate-180" : ""
+    }`}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+  </svg>
+);
+
+const AppleIcon = () => (
+  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+  </svg>
+);
+
+const PlayStoreIcon = () => (
+  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z" />
+  </svg>
+);
+
+const ChevronDownIcon = () => (
+  <svg
+    className="w-6 h-6"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+  </svg>
+);
+
+// Phone Mockup Component with space/planets design
+const PhoneMockup = () => (
+  <div className="phone-mockup w-[280px] sm:w-[320px] mx-auto">
+    <div className="phone-screen aspect-[9/19.5] relative overflow-hidden bg-[#0a0e27]">
+      {/* Status bar */}
+      <div className="absolute top-0 left-0 right-0 h-10 flex items-center justify-between px-6 z-20">
+        <span className="text-white text-xs font-medium">18:43</span>
+        <div className="w-24 h-7 bg-black rounded-b-3xl absolute left-1/2 -translate-x-1/2 top-0" />
+        <div className="flex items-center gap-1">
+          <div className="flex gap-0.5">
+            <div className="w-1 h-1 bg-white/60 rounded-full" />
+            <div className="w-1 h-1 bg-white/60 rounded-full" />
+            <div className="w-1 h-1 bg-white/40 rounded-full" />
+            <div className="w-1 h-1 bg-white/40 rounded-full" />
+          </div>
+          <svg
+            className="w-4 h-4 text-white/80"
+            fill="currentColor"
+            viewBox="0 0 24 24"
           >
-            <h2 className="mb-3 text-2xl font-semibold">Browser extension</h2>
-            <p className="m-0 max-w-[30ch] text-sm opacity-50">
-              Download the browser extension.
-            </p>
-            <div className="flex items-center mt-4">
-              <Image
-                src={chromeIcon}
-                alt="Chrome Icon"
-                width={24}
-                height={24}
-                className="mr-2"
+            <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z" />
+          </svg>
+          <div className="flex items-center">
+            <span className="text-white/80 text-[10px] mr-0.5">71</span>
+            <svg
+              className="w-5 h-3 text-white/80"
+              viewBox="0 0 24 12"
+              fill="currentColor"
+            >
+              <rect
+                x="0"
+                y="0"
+                width="20"
+                height="12"
+                rx="2"
+                stroke="currentColor"
+                strokeWidth="1"
+                fill="none"
               />
-              <Image src={braveIcon} alt="Brave Icon" width={24} height={24} />
-            </div>
-          </a>
-        </div>
-        <div className="group rounded-lg border px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
-          <a href="https://www.youtube.com/watch?v=qwJwp0Vu0jk" target="_blank">
-            <h2 className="mb-3 text-2xl font-semibold">Watch tutorial</h2>
-            <p className="m-0 max-w-[30ch] text-sm opacity-50">
-              Watch installation guide YouTube video.
-            </p>
-            <div className="flex items-center mt-4">
-              <Image
-                src={youtubeIcon}
-                alt="YouTube Icon"
-                width={24}
-                height={24}
-                className="mr-2"
+              <rect
+                x="2"
+                y="2"
+                width="14"
+                height="8"
+                rx="1"
+                fill="currentColor"
               />
-            </div>
-          </a>
-        </div>
-        <div className="group rounded-lg border px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
-          <a href="https://www.youtube.com/watch?v=qwJwp0Vu0jk" target="_blank">
-            <h2 className="mb-3 text-2xl font-semibold">Mobile app</h2>
-            <p className="m-0 max-w-[30ch] text-sm opacity-50">
-              Our mobile app is comming soon to iOS and Android devices.
-            </p>
-            <div className="flex items-center mt-4"></div>
-          </a>
+              <rect
+                x="21"
+                y="3"
+                width="2"
+                height="6"
+                rx="1"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
         </div>
       </div>
 
-      <div className="mt-8 text-center font-light max-w-[80ch]">
-        If you have any questions, feel free to reach out on{" "}
-        <a
-          href="mailto:contact@truespace.app"
-          className="text-blue-500 hover:underline"
-        >
-          contact@truespace.app
-        </a>
+      {/* Stars background - static positions to avoid hydration mismatch */}
+      <div className="absolute inset-0">
+        <div
+          className="absolute w-0.5 h-0.5 bg-white/40 rounded-full"
+          style={{ left: "10%", top: "15%" }}
+        />
+        <div
+          className="absolute w-0.5 h-0.5 bg-white/30 rounded-full"
+          style={{ left: "25%", top: "8%" }}
+        />
+        <div
+          className="absolute w-0.5 h-0.5 bg-white/50 rounded-full"
+          style={{ left: "45%", top: "20%" }}
+        />
+        <div
+          className="absolute w-0.5 h-0.5 bg-white/20 rounded-full"
+          style={{ left: "70%", top: "12%" }}
+        />
+        <div
+          className="absolute w-0.5 h-0.5 bg-white/40 rounded-full"
+          style={{ left: "85%", top: "25%" }}
+        />
+        <div
+          className="absolute w-0.5 h-0.5 bg-white/30 rounded-full"
+          style={{ left: "15%", top: "35%" }}
+        />
+        <div
+          className="absolute w-0.5 h-0.5 bg-white/50 rounded-full"
+          style={{ left: "55%", top: "40%" }}
+        />
+        <div
+          className="absolute w-0.5 h-0.5 bg-white/20 rounded-full"
+          style={{ left: "80%", top: "45%" }}
+        />
+        <div
+          className="absolute w-0.5 h-0.5 bg-white/40 rounded-full"
+          style={{ left: "30%", top: "55%" }}
+        />
+        <div
+          className="absolute w-0.5 h-0.5 bg-white/30 rounded-full"
+          style={{ left: "65%", top: "60%" }}
+        />
+        <div
+          className="absolute w-0.5 h-0.5 bg-white/50 rounded-full"
+          style={{ left: "20%", top: "70%" }}
+        />
+        <div
+          className="absolute w-0.5 h-0.5 bg-white/20 rounded-full"
+          style={{ left: "75%", top: "75%" }}
+        />
+        <div
+          className="absolute w-0.5 h-0.5 bg-white/40 rounded-full"
+          style={{ left: "40%", top: "85%" }}
+        />
+        <div
+          className="absolute w-0.5 h-0.5 bg-white/30 rounded-full"
+          style={{ left: "90%", top: "65%" }}
+        />
+        <div
+          className="absolute w-0.5 h-0.5 bg-white/50 rounded-full"
+          style={{ left: "5%", top: "50%" }}
+        />
       </div>
-    </main>
-  );
+
+      {/* Main content */}
+      <div className="absolute inset-0 pt-14 px-4 flex flex-col">
+        {/* Solar system container */}
+        <div className="relative flex-1 flex items-center justify-center">
+          {/* Orbital rings */}
+          <div className="absolute w-32 h-32 border border-white/10 rounded-full" />
+          <div className="absolute w-48 h-48 border border-white/5 rounded-full" />
+          <div className="absolute w-64 h-64 border border-white/5 rounded-full" />
+
+          {/* Central sun - half yellow/half white labeled "Creativity" */}
+          <div className="absolute flex flex-col items-center z-10">
+            <div className="relative w-20 h-20 rounded-full overflow-hidden shadow-lg shadow-orange-500/30">
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 from-50% to-white to-50%" />
+              <div className="absolute inset-0.5 rounded-full bg-gradient-to-r from-yellow-300 from-50% to-gray-100 to-50% opacity-90" />
+            </div>
+            <span className="text-white/90 text-xs mt-1.5">Creativity</span>
+          </div>
+
+          {/* Orbiting planets */}
+          {/* Civic - Orange at top */}
+          <div
+            className="absolute planet-orbit planet-orbit-1"
+            style={{ width: "200px", height: "200px" }}
+          >
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex flex-col items-center planet-content planet-content-1">
+              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-orange-400 to-orange-600" />
+              <span className="text-white/90 text-xs mt-1">Civic</span>
+            </div>
+          </div>
+
+          {/* Relationships - Green at upper left */}
+          <div
+            className="absolute planet-orbit planet-orbit-2"
+            style={{ width: "140px", height: "140px" }}
+          >
+            <div className="absolute top-3 -left-3 flex flex-col items-center planet-content planet-content-2">
+              <div className="w-5 h-5 rounded-full bg-gradient-to-br from-green-400 to-green-600" />
+              <span className="text-white/90 text-xs mt-1">Relationships</span>
+            </div>
+          </div>
+
+          {/* Justice - Purple at right */}
+          <div
+            className="absolute planet-orbit planet-orbit-3"
+            style={{ width: "170px", height: "170px" }}
+          >
+            <div className="absolute top-1/2 -right-5 -translate-y-1/2 flex flex-col items-center planet-content planet-content-3">
+              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-400 to-purple-600" />
+              <span className="text-white/90 text-xs mt-1">Justice</span>
+            </div>
+          </div>
+
+          {/* Spiritual - Blue at upper right */}
+          <div
+            className="absolute planet-orbit planet-orbit-4"
+            style={{ width: "240px", height: "240px" }}
+          >
+            <div className="absolute top-2 -right-3 flex flex-col items-center planet-content planet-content-4">
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-blue-600" />
+              <span className="text-white/90 text-xs mt-1">Spiritual</span>
+            </div>
+          </div>
+
+          {/* Environmental - Teal at bottom left */}
+          <div
+            className="absolute planet-orbit planet-orbit-5"
+            style={{ width: "220px", height: "220px" }}
+          >
+            <div className="absolute -bottom-1 -left-6 flex flex-col items-center planet-content planet-content-5">
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600" />
+              <span className="text-white/90 text-xs mt-1">Environmental</span>
+            </div>
+          </div>
+
+          {/* Security - Pink with Saturn rings at bottom center */}
+          <div
+            className="absolute planet-orbit planet-orbit-6"
+            style={{ width: "260px", height: "260px" }}
+          >
+            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex flex-col items-center planet-content planet-content-6">
+              <div className="relative">
+                {/* Saturn rings */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-4 border-2 border-pink-400/60 rounded-full" />
+                {/* Planet */}
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 relative z-10" />
+              </div>
+              <span className="text-white/90 text-xs mt-1">Security</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Hamburger menu button - bottom right */}
+        <div className="absolute bottom-6 right-6 z-20">
+          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 shadow-lg flex items-center justify-center">
+            <div className="flex flex-col gap-1.5">
+              <div className="w-6 h-0.5 bg-white rounded-full" />
+              <div className="w-6 h-0.5 bg-white rounded-full" />
+              <div className="w-6 h-0.5 bg-white rounded-full" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+// Feature Card Component
+interface FeatureCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  delay: string;
 }
 
-export default Home;
+const FeatureCard = ({ icon, title, description, delay }: FeatureCardProps) => (
+  <div
+    className={`feature-card glass rounded-2xl p-6 sm:p-8 animate-on-scroll ${delay}`}
+  >
+    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary-400/20 via-primary-500/10 to-cyan-500/10 flex items-center justify-center text-primary-400 mb-4 shadow-lg shadow-primary-500/10">
+      {icon}
+    </div>
+    <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
+      {title}
+    </h3>
+    <p className="text-dark-300 leading-relaxed text-sm sm:text-base">
+      {description}
+    </p>
+  </div>
+);
+
+// FAQ Item Component
+interface FAQItemProps {
+  question: string;
+  answer: string;
+  isOpen: boolean;
+  onClick: () => void;
+  index: number;
+}
+
+const FAQItem = ({
+  question,
+  answer,
+  isOpen,
+  onClick,
+  index,
+}: FAQItemProps) => (
+  <div
+    className={`faq-item glass rounded-xl sm:rounded-2xl mb-3 sm:mb-4 overflow-hidden transition-all duration-300 ${
+      isOpen
+        ? "bg-white/[0.06] border-primary-400/30 shadow-lg shadow-primary-500/5"
+        : "hover:bg-white/[0.04]"
+    }`}
+    style={{ animationDelay: `${index * 100}ms` }}
+  >
+    <button
+      onClick={onClick}
+      className="w-full p-4 sm:p-5 flex items-center justify-between text-left group"
+    >
+      <span
+        className={`text-sm sm:text-base font-medium pr-4 transition-colors ${
+          isOpen
+            ? "text-primary-400"
+            : "text-white group-hover:text-primary-400"
+        }`}
+      >
+        {question}
+      </span>
+      <div
+        className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+          isOpen
+            ? "bg-primary-400/20 text-primary-400"
+            : "bg-white/5 text-dark-400 group-hover:bg-white/10 group-hover:text-white"
+        }`}
+      >
+        <ChevronIcon isOpen={isOpen} />
+      </div>
+    </button>
+    <div
+      className={`overflow-hidden transition-all duration-300 ease-out ${
+        isOpen ? "max-h-96" : "max-h-0"
+      }`}
+    >
+      <div className="px-4 sm:px-5 pb-4 sm:pb-5">
+        <div className="h-px bg-gradient-to-r from-transparent via-primary-400/20 to-transparent mb-4" />
+        <p className="text-dark-300 text-sm sm:text-base leading-relaxed">
+          {answer}
+        </p>
+      </div>
+    </div>
+  </div>
+);
+
+// Store Button Component
+interface StoreButtonProps {
+  store: "apple" | "google";
+  href?: string;
+  comingSoon?: boolean;
+}
+
+const StoreButton = ({ store, href, comingSoon }: StoreButtonProps) => {
+  const content = (
+    <div
+      className={`store-button flex items-center gap-4 px-7 py-4 rounded-2xl transition-all duration-300 ${
+        comingSoon
+          ? "bg-dark-800/60 border border-dark-700/50 cursor-not-allowed text-white"
+          : "bg-white/5 text-white cursor-pointer border border-white/10 hover:bg-white/10 hover:border-white/20 hover:shadow-lg hover:shadow-white/5"
+      }`}
+    >
+      {store === "apple" ? <AppleIcon /> : <PlayStoreIcon />}
+      <div className="text-left">
+        <div
+          className={`text-xs ${
+            comingSoon ? "text-dark-400" : "text-dark-300"
+          }`}
+        >
+          {comingSoon ? "Coming soon to" : "Download on the"}
+        </div>
+        <div
+          className={`text-lg font-semibold ${
+            comingSoon ? "text-dark-400" : "text-white"
+          }`}
+        >
+          {store === "apple" ? "App Store" : "Google Play"}
+        </div>
+      </div>
+    </div>
+  );
+
+  if (comingSoon || !href) {
+    return content;
+  }
+
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      {content}
+    </a>
+  );
+};
+
+// FAQ Data
+const faqData = [
+  {
+    question: "What is .truespace?",
+    answer:
+      "A mobile app and browser extension that gives you a private space to build your digital identity and discover meaningful content—free from ads, tracking, and algorithmic manipulation.",
+  },
+  {
+    question: "How is it different from social media?",
+    answer:
+      "Social platforms maximize engagement to serve ads. .truespace has no ads, no social feeds, and no engagement tricks. It exists solely to help you discover content aligned with your authentic interests.",
+  },
+  {
+    question: "How do recommendations work?",
+    answer:
+      "You share content that matters to you—articles, videos, quotes. .truespace learns from your choices to build a private profile and suggests quality content that aligns with your interests. Your reactions help refine future suggestions.",
+  },
+  {
+    question: "Is my data really private?",
+    answer:
+      "Yes. Your profile is fully encrypted and stored only for you. We don't sell, share, or analyze your data. You can delete everything permanently at any time.",
+  },
+  {
+    question: "Is there a social component?",
+    answer:
+      "No. .truespace is intentionally private. No followers, likes, or social pressure—just your personal space for discovery.",
+  },
+  {
+    question: "Is .truespace free?",
+    answer:
+      ".truespace is subscription-based with no advertising. This keeps our incentives aligned with yours—we succeed when you find value, not when advertisers capture your attention.",
+  },
+];
+
+// Main Component
+export default function Home() {
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+      observerRef.current?.observe(el);
+    });
+
+    // Scroll listener for topbar background
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      observerRef.current?.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const scrollToDownload = () => {
+    document.getElementById("download")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const toggleFAQ = (index: number) => {
+    setOpenFAQ(openFAQ === index ? null : index);
+  };
+
+  return (
+    <>
+      {/* Aurora gradient background */}
+      <div className="aurora-bg" />
+
+      {/* Stars background */}
+      <div className="stars-container" />
+
+      {/* Noise overlay for texture */}
+      <div className="noise-overlay" />
+
+      {/* Floating orbs with glow */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[10%] left-[15%] w-[500px] h-[500px] bg-gradient-to-br from-cyan-500/8 to-transparent rounded-full blur-3xl animate-pulse-slow" />
+        <div className="absolute top-[5%] right-[10%] w-[400px] h-[400px] bg-gradient-to-bl from-purple-500/8 to-transparent rounded-full blur-3xl animate-pulse-slow animation-delay-500" />
+      </div>
+
+      {/* Sticky Topbar */}
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? "bg-dark-900/80 backdrop-blur-xl border-b border-white/[0.05]"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-between h-16 sm:h-20">
+            {/* Logo */}
+            <a href="#" className="flex items-center gap-2">
+              <TruespaceLogo size={32} />
+              <span className="text-lg font-semibold text-white">
+                .truespace
+              </span>
+            </a>
+
+            {/* Navigation - Hidden on mobile */}
+            <nav className="hidden md:flex items-center gap-8">
+              <button
+                onClick={() => scrollToSection("vision")}
+                className="text-dark-300 hover:text-white transition-colors text-sm font-medium"
+              >
+                Vision
+              </button>
+              <button
+                onClick={() => scrollToSection("features")}
+                className="text-dark-300 hover:text-white transition-colors text-sm font-medium"
+              >
+                Features
+              </button>
+              <button
+                onClick={() => scrollToSection("faq")}
+                className="text-dark-300 hover:text-white transition-colors text-sm font-medium"
+              >
+                FAQ
+              </button>
+            </nav>
+
+            {/* CTA Button */}
+            <button
+              onClick={scrollToDownload}
+              className="px-4 sm:px-5 py-2 sm:py-2.5 bg-gradient-to-r from-primary-300 via-primary-400 to-primary-500 text-dark-900 font-semibold rounded-lg sm:rounded-xl text-sm transition-all hover:shadow-lg hover:shadow-primary-500/25"
+            >
+              Get Started
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main className="relative min-h-screen">
+        {/* Hero Section */}
+        <section className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 pt-24 sm:pt-28 pb-16 sm:pb-20 relative">
+          {/* Hero content with phone side by side */}
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 w-full max-w-6xl">
+            {/* Left side - Text content */}
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left flex-1">
+              {/* Main tagline */}
+              <h1 className="hero-animate fade-in-up animation-delay-200 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold mb-4 sm:mb-6 tracking-tight">
+                <span className="gradient-text">Your Internet.</span>
+                <br />
+                <span className="text-white drop-shadow-[0_0_35px_rgba(255,255,255,0.15)]">
+                  Your Rules.
+                </span>
+              </h1>
+
+              {/* Subtitle */}
+              <p className="hero-animate fade-in-up animation-delay-400 text-base sm:text-lg md:text-xl text-dark-300 max-w-xl mb-6 sm:mb-8 leading-relaxed">
+                A private digital space where you own your identity and discover
+                content that truly matters.
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="hero-animate fade-in-up animation-delay-600 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+                <button
+                  onClick={scrollToDownload}
+                  className="btn-primary group px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-primary-300 via-primary-400 to-primary-500 text-dark-900 font-semibold rounded-xl sm:rounded-2xl flex items-center justify-center gap-2 sm:gap-3 shadow-lg shadow-primary-500/25 text-sm sm:text-base"
+                >
+                  <span>Download Now</span>
+                  <svg
+                    className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                    />
+                  </svg>
+                </button>
+                <a
+                  href="#features"
+                  className="px-6 sm:px-8 py-3 sm:py-4 glass text-white font-semibold rounded-xl sm:rounded-2xl text-center hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20 text-sm sm:text-base"
+                >
+                  Learn More
+                </a>
+              </div>
+            </div>
+
+            {/* Right side - Phone mockup */}
+            <div className="hero-animate scale-in animation-delay-800 flex-shrink-0 mt-8 lg:mt-0">
+              <PhoneMockup />
+            </div>
+          </div>
+
+          {/* Scroll indicator */}
+          <button
+            onClick={scrollToDownload}
+            className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 text-dark-500 animate-bounce-slow hover:text-primary-400 transition-colors"
+            aria-label="Scroll down"
+          >
+            <ChevronDownIcon />
+          </button>
+        </section>
+
+        {/* Vision Section */}
+        <section id="vision" className="py-16 sm:py-24 px-4 sm:px-6">
+          <div className="max-w-3xl mx-auto text-center animate-on-scroll">
+            <p className="text-primary-400 font-medium mb-3 sm:mb-4 tracking-wide uppercase text-xs sm:text-sm">
+              Vision
+            </p>
+            <p className="text-base sm:text-lg md:text-xl text-dark-300 leading-relaxed mb-8 sm:mb-12">
+              The internet was built to connect us to knowledge. Instead,
+              algorithms study us to sell ads—trapping us in bubbles designed to
+              maximize engagement, not enrich our lives.
+            </p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 sm:mb-6 tracking-tight">
+              <span className="gradient-text-blue">.truespace</span>
+              <span className="text-white"> is different</span>
+            </h2>
+            <p className="text-base sm:text-lg text-dark-300 leading-relaxed">
+              A private, user-owned space where you build a digital identity
+              that reflects your real values and interests. No ads. No tracking.
+              No manipulation. Just content aligned with who you actually are.
+            </p>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section id="features" className="py-16 sm:py-24 px-4 sm:px-6">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-10 sm:mb-16 animate-on-scroll">
+              <p className="text-primary-400 font-medium mb-3 sm:mb-4 tracking-wide uppercase text-xs sm:text-sm">
+                Features
+              </p>
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-semibold text-white mb-4 sm:mb-6 tracking-tight">
+                Why .truespace?
+              </h2>
+              <p className="text-dark-300 max-w-xl mx-auto text-sm sm:text-base md:text-lg">
+                Built for people who value their time, privacy, and meaningful
+                content.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+              <FeatureCard
+                icon={<UserIcon />}
+                title="Own Your Digital Identity"
+                description="Build a personal profile from content you consciously choose. Unlike platforms that piece together your behavior for advertisers, .truespace creates a private portrait of your interests that only you control."
+                delay="animation-delay-100"
+              />
+              <FeatureCard
+                icon={<BreakFreeIcon />}
+                title="Break Free from Bubbles"
+                description="Traditional platforms show you what keeps you scrolling. .truespace uses your authentic interests to surface content that challenges, inspires, and expands your worldview."
+                delay="animation-delay-200"
+              />
+              <FeatureCard
+                icon={<SparklesIcon />}
+                title="Meaningful Recommendations"
+                description="Every suggestion is designed to be enriching—based on your values, not engagement metrics or advertiser interests. React to recommendations to help .truespace refine your profile and improve future suggestions."
+                delay="animation-delay-300"
+              />
+              <FeatureCard
+                icon={<LockIcon />}
+                title="Complete Privacy"
+                description="Your profile is fully encrypted and never shared. Delete everything instantly at any time—no trace, no hidden copies."
+                delay="animation-delay-400"
+              />
+              <FeatureCard
+                icon={<RefreshIcon />}
+                title="Evolves With You"
+                description="As your interests change, .truespace adapts. Every reaction to recommended content helps the platform refine its understanding of what matters to you."
+                delay="animation-delay-500"
+              />
+              <FeatureCard
+                icon={<ClockIcon />}
+                title="Respects Your Time"
+                description="No infinite scroll or notification anxiety. Discover content worth your focus and step away when you're done."
+                delay="animation-delay-600"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section id="faq" className="py-16 sm:py-24 px-4 sm:px-6 relative">
+          {/* Decorative elements */}
+          <div className="absolute top-1/2 left-0 w-72 h-72 bg-gradient-to-r from-primary-400/5 to-transparent rounded-full blur-3xl -translate-y-1/2 pointer-events-none" />
+          <div className="absolute top-1/3 right-0 w-64 h-64 bg-gradient-to-l from-cyan-500/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+
+          <div className="max-w-5xl mx-auto relative z-10">
+            <div className="text-center mb-10 sm:mb-12 animate-on-scroll">
+              <p className="text-primary-400 font-medium mb-3 sm:mb-4 tracking-wide uppercase text-xs sm:text-sm">
+                FAQ
+              </p>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white tracking-tight mb-3 sm:mb-4">
+                Common Questions
+              </h2>
+              <p className="text-dark-400 text-sm sm:text-base max-w-md mx-auto">
+                Everything you need to know about .truespace
+              </p>
+            </div>
+
+            <div className="animate-on-scroll">
+              {faqData.map((faq, index) => (
+                <FAQItem
+                  key={index}
+                  question={faq.question}
+                  answer={faq.answer}
+                  isOpen={openFAQ === index}
+                  onClick={() => toggleFAQ(index)}
+                  index={index}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA / Download Section */}
+        <section id="download" className="py-16 sm:py-24 px-4 sm:px-6">
+          <div className="max-w-5xl mx-auto">
+            <div className="rounded-2xl sm:rounded-[2rem] p-6 sm:p-10 md:p-14 text-center animate-on-scroll relative overflow-hidden bg-gradient-to-b from-white/[0.04] via-black/20 to-black/40 border border-white/[0.08] shadow-2xl shadow-black/40 backdrop-blur-xl">
+              {/* Metallic shine effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-black/20 pointer-events-none" />
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/50 to-transparent" />
+
+              <div className="relative z-10">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-3 sm:mb-4 tracking-tight">
+                  Ready to reclaim your digital life?
+                </h2>
+                <p className="text-dark-300 mb-6 sm:mb-8 max-w-md mx-auto text-sm sm:text-base">
+                  Download .truespace and start building your private space for
+                  content that truly matters.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+                  <StoreButton
+                    store="apple"
+                    href="https://apps.apple.com/pl/app/truespace/id6751807004"
+                  />
+                  <StoreButton store="google" comingSoon />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="py-8 sm:py-12 px-4 sm:px-6 border-t border-dark-800">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex flex-col items-center gap-6 sm:gap-8">
+              {/* Brand */}
+              <div className="flex items-center gap-2">
+                <TruespaceLogo size={28} />
+                <span className="text-base sm:text-lg font-semibold text-white">
+                  .truespace
+                </span>
+              </div>
+
+              {/* Links */}
+              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-dark-400 text-sm sm:text-base">
+                <a
+                  href="/privacy-policy"
+                  className="hover:text-white transition-colors"
+                >
+                  Privacy Policy
+                </a>
+                <a
+                  href="mailto:contact@truespace.app"
+                  className="hover:text-white transition-colors"
+                >
+                  Contact
+                </a>
+                <a
+                  href="https://chromewebstore.google.com/detail/truespace/bflicohjlcnnopbpbofikndjgphdacmb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  Browser Extension
+                </a>
+              </div>
+
+              {/* Copyright */}
+              <div className="text-dark-500 text-xs sm:text-sm">
+                © {new Date().getFullYear()} .truespace
+              </div>
+            </div>
+          </div>
+        </footer>
+      </main>
+    </>
+  );
+}

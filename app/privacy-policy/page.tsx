@@ -5,7 +5,7 @@ export default function PrivacyPolicyPage() {
         <h1 className="text-center w-100 font-semibold text-2xl">
           Privacy Policy
         </h1>
-        <p className="my-8">Last updated: September 17, 2025</p>
+        <p className="my-8">Last updated: November 27, 2025</p>
         <p>
           This Privacy Policy describes Our policies and procedures on the
           collection, use and disclosure of Your information when You use the
@@ -13,9 +13,15 @@ export default function PrivacyPolicyPage() {
           protects You.
         </p>
         <p>
-          We use Your Personal data to provide and improve the Service. By using
+          We use Your Personal Data to provide and improve the Service. By using
           the Service, You agree to the collection and use of information in
           accordance with this Privacy Policy.
+        </p>
+        <p>
+          <strong>Our Commitment</strong>: .truespace is built on the principle
+          that Your data belongs to You. Your profile is private, encrypted, and
+          never shared with advertisers. You have full control to delete Your
+          data at any time.
         </p>
         <h2>Interpretation and Definitions</h2>
         <h3>Interpretation</h3>
@@ -75,6 +81,13 @@ export default function PrivacyPolicyPage() {
           </li>
           <li>
             <p>
+              <strong>Profile Data</strong> refers to the content You share with
+              the Service, Your reactions to recommendations, and the personal
+              profile .truespace builds from Your interactions.
+            </p>
+          </li>
+          <li>
+            <p>
               <strong>Service</strong> refers to the Application.
             </p>
           </li>
@@ -114,8 +127,18 @@ export default function PrivacyPolicyPage() {
           not limited to:
         </p>
         <ul>
+          <li>Email address</li>
           <li>Usage Data</li>
         </ul>
+        <h4>Profile Data</h4>
+        <p>
+          When You use .truespace, You choose to share content that matters to
+          You—articles, videos, images, quotes, and notes. Your reactions to
+          recommended content also contribute to Your profile. This Profile Data
+          is used solely to build Your private profile and generate personalized
+          recommendations. It is encrypted and never shared with third parties
+          for advertising purposes.
+        </p>
         <h4>Usage Data</h4>
         <p>Usage Data is collected automatically when using the Service.</p>
         <p>
@@ -145,6 +168,13 @@ export default function PrivacyPolicyPage() {
             <p>
               <strong>To provide and maintain our Service</strong>, including to
               monitor the usage of our Service.
+            </p>
+          </li>
+          <li>
+            <p>
+              <strong>To build and refine Your profile</strong>: To generate
+              personalized content recommendations based on the content You share
+              and Your reactions to recommendations.
             </p>
           </li>
           <li>
@@ -204,12 +234,18 @@ export default function PrivacyPolicyPage() {
             <p>
               <strong>For other purposes</strong>: We may use Your information
               for other purposes, such as data analysis, identifying usage
-              trends, determining the effectiveness of our promotional campaigns
-              and to evaluate and improve our Service, products, services,
-              marketing and your experience.
+              trends, and to evaluate and improve our Service, products, services,
+              and your experience.
             </p>
           </li>
         </ul>
+        <p>
+          <strong>
+            We do not use Your data for targeted advertising or sell Your data
+            to advertisers.
+          </strong>
+        </p>
+        <h3>Sharing Your Personal Information</h3>
         <p>
           We may share Your personal information in the following situations:
         </p>
@@ -217,7 +253,8 @@ export default function PrivacyPolicyPage() {
           <li>
             <strong>With Service Providers:</strong> We may share Your personal
             information with Service Providers to monitor and analyze the use of
-            our Service, to contact You.
+            our Service, to contact You. These providers are contractually
+            obligated to protect Your data.
           </li>
           <li>
             <strong>For business transfers:</strong> We may share or transfer
@@ -233,21 +270,16 @@ export default function PrivacyPolicyPage() {
             that We control or that are under common control with Us.
           </li>
           <li>
-            <strong>With business partners:</strong> We may share Your
-            information with Our business partners to offer You certain
-            products, services or promotions.
-          </li>
-          <li>
-            <strong>With other users:</strong> when You share personal
-            information or otherwise interact in the public areas with other
-            users, such information may be viewed by all users and may be
-            publicly distributed outside.
-          </li>
-          <li>
             <strong>With Your consent</strong>: We may disclose Your personal
             information for any other purpose with Your consent.
           </li>
         </ul>
+        <p>
+          <strong>
+            We do not share Your Profile Data or personal information with
+            advertising networks or data brokers.
+          </strong>
+        </p>
         <h3>Retention of Your Personal Data</h3>
         <p>
           The Company will retain Your Personal Data only for as long as is
@@ -291,8 +323,9 @@ export default function PrivacyPolicyPage() {
           Personal Data that We have collected about You.
         </p>
         <p>
-          Our Service may give You the ability to delete certain information
-          about You from within the Service.
+          Our Service gives You the ability to delete Your Profile Data and
+          content from within the Service at any time. When You delete Your data,
+          it is removed permanently—no hidden copies are retained.
         </p>
         <p>
           You may update, amend, or delete Your information at any time by
@@ -338,11 +371,17 @@ export default function PrivacyPolicyPage() {
         </ul>
         <h3>Security of Your Personal Data</h3>
         <p>
-          The security of Your Personal Data is important to Us, but remember
-          that no method of transmission over the Internet, or method of
-          electronic storage is 100% secure. While We strive to use commercially
-          acceptable means to protect Your Personal Data, We cannot guarantee
-          its absolute security.
+          The security of Your Personal Data is important to Us. Your Profile
+          Data is encrypted to ensure that only You can access Your personal
+          profile and content.
+        </p>
+        <p>
+          We implement industry-standard security measures including encrypted
+          data transmission (TLS/SSL), secure password hashing, and access
+          controls. While We strive to use commercially acceptable means to
+          protect Your Personal Data, remember that no method of transmission
+          over the Internet, or method of electronic storage is 100% secure. We
+          cannot guarantee its absolute security.
         </p>
         <h2>Children's Privacy</h2>
         <p>
@@ -363,9 +402,10 @@ export default function PrivacyPolicyPage() {
         <h2>Links to Other Websites</h2>
         <p>
           Our Service may contain links to other websites that are not operated
-          by Us. If You click on a third party link, You will be directed to
-          that third party's site. We strongly advise You to review the Privacy
-          Policy of every site You visit.
+          by Us, including recommended content from third-party sources. If You
+          click on a third party link, You will be directed to that third
+          party's site. We strongly advise You to review the Privacy Policy of
+          every site You visit.
         </p>
         <p>
           We have no control over and assume no responsibility for the content,
