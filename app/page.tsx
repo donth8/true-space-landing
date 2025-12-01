@@ -172,235 +172,82 @@ const ChevronDownIcon = () => (
   </svg>
 );
 
-// Phone Mockup Component with space/planets design
-const PhoneMockup = () => (
-  <div className="phone-mockup w-[280px] sm:w-[320px] mx-auto">
-    <div className="phone-screen aspect-[9/19.5] relative overflow-hidden bg-[#0a0e27]">
-      {/* Status bar */}
-      <div className="absolute top-0 left-0 right-0 h-10 flex items-center justify-between px-6 z-20">
-        <span className="text-white text-xs font-medium">18:43</span>
-        <div className="w-24 h-7 bg-black rounded-b-3xl absolute left-1/2 -translate-x-1/2 top-0" />
-        <div className="flex items-center gap-1">
-          <div className="flex gap-0.5">
-            <div className="w-1 h-1 bg-white/60 rounded-full" />
-            <div className="w-1 h-1 bg-white/60 rounded-full" />
-            <div className="w-1 h-1 bg-white/40 rounded-full" />
-            <div className="w-1 h-1 bg-white/40 rounded-full" />
-          </div>
-          <svg
-            className="w-4 h-4 text-white/80"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z" />
-          </svg>
-          <div className="flex items-center">
-            <span className="text-white/80 text-[10px] mr-0.5">71</span>
-            <svg
-              className="w-5 h-3 text-white/80"
-              viewBox="0 0 24 12"
-              fill="currentColor"
-            >
-              <rect
-                x="0"
-                y="0"
-                width="20"
-                height="12"
-                rx="2"
-                stroke="currentColor"
-                strokeWidth="1"
-                fill="none"
-              />
-              <rect
-                x="2"
-                y="2"
-                width="14"
-                height="8"
-                rx="1"
-                fill="currentColor"
-              />
-              <rect
-                x="21"
-                y="3"
-                width="2"
-                height="6"
-                rx="1"
-                fill="currentColor"
-              />
-            </svg>
+// Phone Mockup Component with GIF and click-based switching
+const PhoneMockup = () => {
+  const [activePhone, setActivePhone] = useState(0); // 0 = solar system, 1 = recommendations
+  const [gifKey, setGifKey] = useState(0); // Key to force GIF reload
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Add GIF loop transition effect - assumes GIF is about 8 seconds long
+  useEffect(() => {
+    const gifDuration = 8000; // Adjust this to match your GIF duration in milliseconds
+    const transitionDuration = 300;
+
+    const interval = setInterval(() => {
+      // Start fade out
+      setIsTransitioning(true);
+      
+      // After fade out completes, reload GIF and fade back in
+      setTimeout(() => {
+        setGifKey((prev) => prev + 1);
+        setIsTransitioning(false);
+      }, transitionDuration);
+    }, gifDuration);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const handlePhoneClick = () => {
+    setActivePhone((prev) => (prev === 0 ? 1 : 0));
+  };
+
+  return (
+    <div className="relative w-[280px] sm:w-[320px] mx-auto h-[580px] sm:h-[660px] cursor-pointer" onClick={handlePhoneClick}>
+      {/* Phone 1 - Solar System GIF */}
+      <div
+        className={`absolute transition-all duration-700 ease-in-out ${
+          activePhone === 0
+            ? "top-0 left-0 z-20 opacity-100"
+            : "top-8 left-8 z-10 opacity-80"
+        }`}
+      >
+        <div className="phone-mockup w-[280px] sm:w-[320px]">
+          <div className="phone-screen aspect-[9/19.5] relative overflow-hidden">
+            <Image
+              src="/iphone_solarsystem.gif"
+              alt="Solar System"
+              fill
+              className="object-cover"
+              priority
+              unoptimized
+            />
           </div>
         </div>
       </div>
 
-      {/* Stars background - static positions to avoid hydration mismatch */}
-      <div className="absolute inset-0">
-        <div
-          className="absolute w-0.5 h-0.5 bg-white/40 rounded-full"
-          style={{ left: "10%", top: "15%" }}
-        />
-        <div
-          className="absolute w-0.5 h-0.5 bg-white/30 rounded-full"
-          style={{ left: "25%", top: "8%" }}
-        />
-        <div
-          className="absolute w-0.5 h-0.5 bg-white/50 rounded-full"
-          style={{ left: "45%", top: "20%" }}
-        />
-        <div
-          className="absolute w-0.5 h-0.5 bg-white/20 rounded-full"
-          style={{ left: "70%", top: "12%" }}
-        />
-        <div
-          className="absolute w-0.5 h-0.5 bg-white/40 rounded-full"
-          style={{ left: "85%", top: "25%" }}
-        />
-        <div
-          className="absolute w-0.5 h-0.5 bg-white/30 rounded-full"
-          style={{ left: "15%", top: "35%" }}
-        />
-        <div
-          className="absolute w-0.5 h-0.5 bg-white/50 rounded-full"
-          style={{ left: "55%", top: "40%" }}
-        />
-        <div
-          className="absolute w-0.5 h-0.5 bg-white/20 rounded-full"
-          style={{ left: "80%", top: "45%" }}
-        />
-        <div
-          className="absolute w-0.5 h-0.5 bg-white/40 rounded-full"
-          style={{ left: "30%", top: "55%" }}
-        />
-        <div
-          className="absolute w-0.5 h-0.5 bg-white/30 rounded-full"
-          style={{ left: "65%", top: "60%" }}
-        />
-        <div
-          className="absolute w-0.5 h-0.5 bg-white/50 rounded-full"
-          style={{ left: "20%", top: "70%" }}
-        />
-        <div
-          className="absolute w-0.5 h-0.5 bg-white/20 rounded-full"
-          style={{ left: "75%", top: "75%" }}
-        />
-        <div
-          className="absolute w-0.5 h-0.5 bg-white/40 rounded-full"
-          style={{ left: "40%", top: "85%" }}
-        />
-        <div
-          className="absolute w-0.5 h-0.5 bg-white/30 rounded-full"
-          style={{ left: "90%", top: "65%" }}
-        />
-        <div
-          className="absolute w-0.5 h-0.5 bg-white/50 rounded-full"
-          style={{ left: "5%", top: "50%" }}
-        />
-      </div>
-
-      {/* Main content */}
-      <div className="absolute inset-0 pt-14 px-4 flex flex-col">
-        {/* Solar system container */}
-        <div className="relative flex-1 flex items-center justify-center">
-          {/* Orbital rings */}
-          <div className="absolute w-32 h-32 border border-white/10 rounded-full" />
-          <div className="absolute w-48 h-48 border border-white/5 rounded-full" />
-          <div className="absolute w-64 h-64 border border-white/5 rounded-full" />
-
-          {/* Central sun - half yellow/half white labeled "Creativity" */}
-          <div className="absolute flex flex-col items-center z-10">
-            <div className="relative w-20 h-20 rounded-full overflow-hidden shadow-lg shadow-orange-500/30">
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 from-50% to-white to-50%" />
-              <div className="absolute inset-0.5 rounded-full bg-gradient-to-r from-yellow-300 from-50% to-gray-100 to-50% opacity-90" />
-            </div>
-            <span className="text-white/90 text-xs mt-1.5">Creativity</span>
-          </div>
-
-          {/* Orbiting planets */}
-          {/* Civic - Orange at top */}
-          <div
-            className="absolute planet-orbit planet-orbit-1"
-            style={{ width: "200px", height: "200px" }}
-          >
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex flex-col items-center planet-content planet-content-1">
-              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-orange-400 to-orange-600" />
-              <span className="text-white/90 text-xs mt-1">Civic</span>
-            </div>
-          </div>
-
-          {/* Relationships - Green at upper left */}
-          <div
-            className="absolute planet-orbit planet-orbit-2"
-            style={{ width: "140px", height: "140px" }}
-          >
-            <div className="absolute top-3 -left-3 flex flex-col items-center planet-content planet-content-2">
-              <div className="w-5 h-5 rounded-full bg-gradient-to-br from-green-400 to-green-600" />
-              <span className="text-white/90 text-xs mt-1">Relationships</span>
-            </div>
-          </div>
-
-          {/* Justice - Purple at right */}
-          <div
-            className="absolute planet-orbit planet-orbit-3"
-            style={{ width: "170px", height: "170px" }}
-          >
-            <div className="absolute top-1/2 -right-5 -translate-y-1/2 flex flex-col items-center planet-content planet-content-3">
-              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-400 to-purple-600" />
-              <span className="text-white/90 text-xs mt-1">Justice</span>
-            </div>
-          </div>
-
-          {/* Spiritual - Blue at upper right */}
-          <div
-            className="absolute planet-orbit planet-orbit-4"
-            style={{ width: "240px", height: "240px" }}
-          >
-            <div className="absolute top-2 -right-3 flex flex-col items-center planet-content planet-content-4">
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-blue-600" />
-              <span className="text-white/90 text-xs mt-1">Spiritual</span>
-            </div>
-          </div>
-
-          {/* Environmental - Teal at bottom left */}
-          <div
-            className="absolute planet-orbit planet-orbit-5"
-            style={{ width: "220px", height: "220px" }}
-          >
-            <div className="absolute -bottom-1 -left-6 flex flex-col items-center planet-content planet-content-5">
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600" />
-              <span className="text-white/90 text-xs mt-1">Environmental</span>
-            </div>
-          </div>
-
-          {/* Security - Pink with Saturn rings at bottom center */}
-          <div
-            className="absolute planet-orbit planet-orbit-6"
-            style={{ width: "260px", height: "260px" }}
-          >
-            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex flex-col items-center planet-content planet-content-6">
-              <div className="relative">
-                {/* Saturn rings */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-4 border-2 border-pink-400/60 rounded-full" />
-                {/* Planet */}
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 relative z-10" />
-              </div>
-              <span className="text-white/90 text-xs mt-1">Security</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Hamburger menu button - bottom right */}
-        <div className="absolute bottom-6 right-6 z-20">
-          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 shadow-lg flex items-center justify-center">
-            <div className="flex flex-col gap-1.5">
-              <div className="w-6 h-0.5 bg-white rounded-full" />
-              <div className="w-6 h-0.5 bg-white rounded-full" />
-              <div className="w-6 h-0.5 bg-white rounded-full" />
-            </div>
+      {/* Phone 2 - Recommendations Screenshot */}
+      <div
+        className={`absolute transition-all duration-700 ease-in-out ${
+          activePhone === 1
+            ? "top-0 left-0 z-20 opacity-100"
+            : "top-8 left-8 z-10 opacity-80"
+        }`}
+      >
+        <div className="phone-mockup w-[280px] sm:w-[320px]">
+          <div className="phone-screen aspect-[9/19.5] relative overflow-hidden">
+            <Image
+              src="/iphone_recommendations.png"
+              alt="Recommendations"
+              fill
+              className="object-cover"
+              priority
+            />
           </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 // Feature Card Component
 interface FeatureCardProps {
