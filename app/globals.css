@@ -22,9 +22,16 @@ body {
   min-height: 100vh;
 }
 
-/* Smooth scrolling */
+/* Smooth scrolling with snap */
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+/* Snap sections */
+.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 /* Custom scrollbar */

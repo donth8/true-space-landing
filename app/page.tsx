@@ -509,9 +509,9 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="relative min-h-screen">
+      <main className="relative">
         {/* Hero Section */}
-        <section className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 pt-24 sm:pt-28 pb-16 sm:pb-20 relative">
+        <section className="snap-section h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-24 sm:py-0 relative overflow-hidden">
           {/* Hero content with phone side by side */}
           <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 w-full max-w-6xl">
             {/* Left side - Text content */}
@@ -578,11 +578,8 @@ export default function Home() {
         </section>
 
         {/* Vision Section */}
-        <section id="vision" className="py-16 sm:py-24 px-4 sm:px-6">
+        <section id="vision" className="snap-section h-screen flex items-center justify-center px-4 sm:px-6">
           <div className="max-w-3xl mx-auto text-center animate-on-scroll">
-            <p className="text-primary-400 font-medium mb-3 sm:mb-4 tracking-wide uppercase text-xs sm:text-sm">
-              Vision
-            </p>
             <p className="text-base sm:text-lg md:text-xl text-dark-300 leading-relaxed mb-8 sm:mb-12">
               The internet was built to connect us to knowledge. Instead,
               algorithms study us to sell ads—trapping us in bubbles designed to
@@ -601,18 +598,14 @@ export default function Home() {
         </section>
 
         {/* Features Section */}
-        <section id="features" className="py-16 sm:py-24 px-4 sm:px-6">
+        <section id="features" className="snap-section min-h-screen flex items-center justify-center px-4 sm:px-6 py-16">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-10 sm:mb-16 animate-on-scroll">
-              <p className="text-primary-400 font-medium mb-3 sm:mb-4 tracking-wide uppercase text-xs sm:text-sm">
-                Features
-              </p>
               <h2 className="text-2xl sm:text-4xl md:text-5xl font-semibold text-white mb-4 sm:mb-6 tracking-tight">
                 Why .truespace?
               </h2>
               <p className="text-dark-300 max-w-xl mx-auto text-sm sm:text-base md:text-lg">
-                Built for people who value their time, privacy, and meaningful
-                content.
+                Built for people who value their time, privacy, and meaningful content.
               </p>
             </div>
 
@@ -658,16 +651,13 @@ export default function Home() {
         </section>
 
         {/* FAQ Section */}
-        <section id="faq" className="py-16 sm:py-24 px-4 sm:px-6 relative">
+        <section id="faq" className="snap-section min-h-screen flex items-center justify-center px-4 sm:px-6 py-16 relative">
           {/* Decorative elements */}
           <div className="absolute top-1/2 left-0 w-72 h-72 bg-gradient-to-r from-primary-400/5 to-transparent rounded-full blur-3xl -translate-y-1/2 pointer-events-none" />
           <div className="absolute top-1/3 right-0 w-64 h-64 bg-gradient-to-l from-cyan-500/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 
           <div className="max-w-5xl mx-auto relative z-10">
             <div className="text-center mb-10 sm:mb-12 animate-on-scroll">
-              <p className="text-primary-400 font-medium mb-3 sm:mb-4 tracking-wide uppercase text-xs sm:text-sm">
-                FAQ
-              </p>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white tracking-tight mb-3 sm:mb-4">
                 Common Questions
               </h2>
@@ -692,8 +682,9 @@ export default function Home() {
         </section>
 
         {/* CTA / Download Section */}
-        <section id="download" className="py-16 sm:py-24 px-4 sm:px-6">
-          <div className="max-w-5xl mx-auto">
+        <section id="download" className="snap-section h-screen flex flex-col justify-between px-4 sm:px-6">
+          <div className="flex-1 flex items-center justify-center">
+            <div className="max-w-5xl mx-auto w-full">
             <div className="rounded-2xl sm:rounded-[2rem] p-6 sm:p-10 md:p-14 text-center animate-on-scroll relative overflow-hidden bg-gradient-to-b from-white/[0.04] via-black/20 to-black/40 border border-white/[0.08] shadow-2xl shadow-black/40 backdrop-blur-xl">
               {/* Metallic shine effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-black/20 pointer-events-none" />
@@ -718,51 +709,52 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+          </div>
 
-        {/* Footer */}
-        <footer className="py-8 sm:py-12 px-4 sm:px-6 border-t border-dark-800">
-          <div className="max-w-5xl mx-auto">
-            <div className="flex flex-col items-center gap-6 sm:gap-8">
-              {/* Brand */}
-              <div className="flex items-center gap-2">
-                <TruespaceLogo size={28} />
-                <span className="text-base sm:text-lg font-semibold text-white">
-                  .truespace
-                </span>
-              </div>
+          {/* Footer */}
+          <footer className="py-6 sm:py-8 px-4 sm:px-6 border-t border-dark-800">
+            <div className="max-w-5xl mx-auto">
+              <div className="flex flex-col items-center gap-4 sm:gap-6">
+                {/* Brand */}
+                <div className="flex items-center gap-2">
+                  <TruespaceLogo size={24} />
+                  <span className="text-sm sm:text-base font-semibold text-white">
+                    .truespace
+                  </span>
+                </div>
 
-              {/* Links */}
-              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-dark-400 text-sm sm:text-base">
-                <a
-                  href="/privacy-policy"
-                  className="hover:text-white transition-colors"
-                >
-                  Privacy Policy
-                </a>
-                <a
-                  href="mailto:contact@truespace.app"
-                  className="hover:text-white transition-colors"
-                >
-                  Contact
-                </a>
-                <a
-                  href="https://chromewebstore.google.com/detail/truespace/bflicohjlcnnopbpbofikndjgphdacmb"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors"
-                >
-                  Browser Extension
-                </a>
-              </div>
+                {/* Links */}
+                <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-dark-400 text-xs sm:text-sm">
+                  <a
+                    href="/privacy-policy"
+                    className="hover:text-white transition-colors"
+                  >
+                    Privacy Policy
+                  </a>
+                  <a
+                    href="mailto:contact@truespace.app"
+                    className="hover:text-white transition-colors"
+                  >
+                    Contact
+                  </a>
+                  <a
+                    href="https://chromewebstore.google.com/detail/truespace/bflicohjlcnnopbpbofikndjgphdacmb"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors"
+                  >
+                    Browser Extension
+                  </a>
+                </div>
 
-              {/* Copyright */}
-              <div className="text-dark-500 text-xs sm:text-sm">
-                © {new Date().getFullYear()} .truespace
+                {/* Copyright */}
+                <div className="text-dark-500 text-xs" suppressHydrationWarning>
+                  © {new Date().getFullYear()} .truespace
+                </div>
               </div>
             </div>
-          </div>
-        </footer>
+          </footer>
+        </section>
       </main>
     </>
   );
