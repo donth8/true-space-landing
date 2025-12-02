@@ -511,7 +511,7 @@ export default function Home() {
 
       <main className="relative">
         {/* Hero Section */}
-        <section className="snap-section h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-24 sm:py-0 relative overflow-hidden">
+        <section className="snap-section min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 pt-32 sm:pt-36 pb-24 relative overflow-hidden">
           {/* Hero content with phone side by side */}
           <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 w-full max-w-6xl">
             {/* Left side - Text content */}
