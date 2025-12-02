@@ -366,7 +366,7 @@ const faqData = [
   {
     question: "What is .truespace?",
     answer:
-      "A mobile app and browser extension that gives you a private space to build your digital identity and discover meaningful content—free from ads, tracking, and algorithmic manipulation.",
+      "A mobile app and browser extension that gives you a private space to build your digital identity and discover meaningful content, free from ads, tracking, and algorithmic manipulation.",
   },
   {
     question: "How is it different from social media?",
