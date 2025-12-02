@@ -172,30 +172,9 @@ const ChevronDownIcon = () => (
   </svg>
 );
 
-// Phone Mockup Component with GIF and click-based switching
+// Phone Mockup Component with click-based switching
 const PhoneMockup = () => {
   const [activePhone, setActivePhone] = useState(0); // 0 = solar system, 1 = recommendations
-  const [gifKey, setGifKey] = useState(0); // Key to force GIF reload
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
-  // Add GIF loop transition effect - assumes GIF is about 8 seconds long
-  useEffect(() => {
-    const gifDuration = 8000; // Adjust this to match your GIF duration in milliseconds
-    const transitionDuration = 300;
-
-    const interval = setInterval(() => {
-      // Start fade out
-      setIsTransitioning(true);
-      
-      // After fade out completes, reload GIF and fade back in
-      setTimeout(() => {
-        setGifKey((prev) => prev + 1);
-        setIsTransitioning(false);
-      }, transitionDuration);
-    }, gifDuration);
-
-    return () => clearInterval(interval);
-  }, []);
 
   const handlePhoneClick = () => {
     setActivePhone((prev) => (prev === 0 ? 1 : 0));
@@ -203,7 +182,7 @@ const PhoneMockup = () => {
 
   return (
     <div className="relative w-[280px] sm:w-[320px] mx-auto h-[580px] sm:h-[660px] cursor-pointer" onClick={handlePhoneClick}>
-      {/* Phone 1 - Solar System GIF */}
+      {/* Phone 1 - Solar System Video */}
       <div
         className={`absolute transition-all duration-700 ease-in-out ${
           activePhone === 0
@@ -213,13 +192,13 @@ const PhoneMockup = () => {
       >
         <div className="phone-mockup w-[280px] sm:w-[320px]">
           <div className="phone-screen aspect-[9/19.5] relative overflow-hidden">
-            <Image
-              src="/iphone_solarsystem.gif"
-              alt="Solar System"
-              fill
-              className="object-cover"
-              priority
-              unoptimized
+            <video
+              src="/iphone_solarsystem.mp4"
+              className="absolute inset-0 w-full h-full object-cover"
+              autoPlay
+              loop
+              muted
+              playsInline
             />
           </div>
         </div>
