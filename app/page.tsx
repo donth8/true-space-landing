@@ -391,7 +391,7 @@ const faqData = [
   {
     question: "Is .truespace free?",
     answer:
-      ".truespace is subscription-based with no advertising. This keeps our incentives aligned with yours—we succeed when you find value, not when advertisers capture your attention.",
+      "Currently, .truespace is in beta-testing phase. It is 100% free. In the future we may consider it to be subscription-based with no advertising to keeps our incentives aligned with yours—we succeed when you find value, not when advertisers capture your attention.",
   },
 ];
 
@@ -527,7 +527,7 @@ export default function Home() {
 
               {/* Subtitle */}
               <p className="hero-animate fade-in-up animation-delay-400 text-base sm:text-lg md:text-xl text-dark-300 max-w-xl mb-6 sm:mb-8 leading-relaxed">
-                A private digital space where you own your identity and discover
+                Welcome to a private digital space where you own your identity and discover
                 content that truly matters.
               </p>
 
@@ -593,9 +593,9 @@ export default function Home() {
               <span className="text-white"> is different</span>
             </h2>
             <p className="text-base sm:text-lg text-dark-300 leading-relaxed">
-              A private, user-owned space where you build a digital identity
-              that reflects your real values and interests. No ads. No tracking.
-              No manipulation. Just content aligned with who you actually are.
+              .truespace is a private space where you build a digital identity
+              that reflects your values and interests. No ads. No tracking.
+              No manipulation. Just content aligned with who you are.
             </p>
           </div>
         </section>
@@ -620,37 +620,37 @@ export default function Home() {
               <FeatureCard
                 icon={<UserIcon />}
                 title="Own Your Digital Identity"
-                description="Build a personal profile from content you consciously choose. Unlike platforms that piece together your behavior for advertisers, .truespace creates a private portrait of your interests that only you control."
+                description="Build your identity from content you consciously choose, not data harvested for advertisers."
                 delay="animation-delay-100"
               />
               <FeatureCard
                 icon={<BreakFreeIcon />}
                 title="Break Free from Bubbles"
-                description="Traditional platforms show you what keeps you scrolling. .truespace uses your authentic interests to surface content that challenges, inspires, and expands your worldview."
+                description="Escape echo chambers. Discover content based on your authentic interests, not what keeps you scrolling. Our content is curated to challenge, inspire, and expand your worldview."
                 delay="animation-delay-200"
               />
               <FeatureCard
                 icon={<SparklesIcon />}
                 title="Meaningful Recommendations"
-                description="Every suggestion is designed to be enriching—based on your values, not engagement metrics or advertiser interests. React to recommendations to help .truespace refine your profile and improve future suggestions."
+                description="Suggestions designed to enrich, not just engage. Based on your values, refined by your reactions, never optimized for advertisers."
                 delay="animation-delay-300"
               />
               <FeatureCard
                 icon={<LockIcon />}
                 title="Complete Privacy"
-                description="Your profile is fully encrypted and never shared. Delete everything instantly at any time—no trace, no hidden copies."
+                description="Fully encrypted profile, never shared. You can delete everything instantly. No trace, no hidden copies."
                 delay="animation-delay-400"
               />
               <FeatureCard
                 icon={<RefreshIcon />}
                 title="Evolves With You"
-                description="As your interests change, .truespace adapts. Every reaction to recommended content helps the platform refine its understanding of what matters to you."
+                description="Your interests change, and so does your space. Every share, every reaction refines the platform's understanding of you better."
                 delay="animation-delay-500"
               />
               <FeatureCard
                 icon={<ClockIcon />}
                 title="Respects Your Time"
-                description="No infinite scroll or notification anxiety. Discover content worth your focus and step away when you're done."
+                description="No infinite scroll or notification anxiety. Content worth your focus, designed so you can step away when you're done."
                 delay="animation-delay-600"
               />
             </div>
@@ -705,8 +705,7 @@ export default function Home() {
                   Ready to reclaim your digital life?
                 </h2>
                 <p className="text-dark-300 mb-6 sm:mb-8 max-w-md mx-auto text-sm sm:text-base">
-                  Download .truespace and start building your private space for
-                  content that truly matters.
+                  Start building your private space for content that truly matters.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
