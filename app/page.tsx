@@ -601,8 +601,10 @@ export default function Home() {
         <section id="features" className="snap-section min-h-screen flex items-center justify-center px-4 sm:px-6 py-16">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-10 sm:mb-16 animate-on-scroll">
-              <h2 className="text-2xl sm:text-4xl md:text-5xl font-semibold text-white mb-4 sm:mb-6 tracking-tight">
-                Why .truespace?
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-4 sm:mb-6 tracking-tight">
+                <span className="text-white">Why </span>
+                <span className="gradient-text-blue">.truespace</span>
+                <span className="text-white">?</span>
               </h2>
               <p className="text-dark-300 max-w-xl mx-auto text-sm sm:text-base md:text-lg">
                 Built for people who value their time, privacy, and meaningful content.
