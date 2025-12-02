@@ -553,10 +553,10 @@ export default function Home() {
                   </svg>
                 </button>
                 <a
-                  href="#features"
+                  href="/how-it-works"
                   className="px-6 sm:px-8 py-3 sm:py-4 glass text-white font-semibold rounded-xl sm:rounded-2xl text-center hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20 text-sm sm:text-base"
                 >
-                  Learn More
+                  How It Works?
                 </a>
               </div>
             </div>
@@ -727,6 +727,12 @@ export default function Home() {
 
                 {/* Links */}
                 <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-dark-400 text-xs sm:text-sm">
+                  <a
+                    href="/how-it-works"
+                    className="hover:text-white transition-colors"
+                  >
+                    How It Works
+                  </a>
                   <a
                     href="/privacy-policy"
                     className="hover:text-white transition-colors"
