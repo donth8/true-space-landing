@@ -132,49 +132,6 @@ html {
   box-shadow: 0 0 30px rgba(251, 191, 36, 0.1);
 }
 
-.glass-dark {
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-}
-
-/* Glowing border effect */
-.glow-border {
-  position: relative;
-}
-
-.glow-border::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  background: linear-gradient(135deg, #fbbf24, #22d3ee, #a855f7, #fbbf24);
-  background-size: 300% 300%;
-  border-radius: inherit;
-  z-index: -1;
-  animation: glowBorder 4s ease infinite;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.glow-border:hover::before {
-  opacity: 1;
-}
-
-@keyframes glowBorder {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-/* Glow effects */
-.glow-gold {
-  box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
-}
-
-.glow-gold-intense {
-  box-shadow: 0 0 60px rgba(251, 191, 36, 0.4);
-}
 
 /* Phone mockup styling */
 .phone-mockup {
@@ -276,13 +233,6 @@ html {
   transform: scale(0.98);
 }
 
-/* Floating particles background */
-.particle {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(251, 191, 36, 0.1);
-  animation: float 6s ease-in-out infinite;
-}
 
 /* Subtle noise texture overlay */
 .noise-overlay {
@@ -426,84 +376,3 @@ html {
   50% { opacity: 0.4; }
 }
 
-/* Planet orbit animations */
-.planet-orbit {
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-.planet-orbit-1 { animation: planetOrbit1 20s linear infinite; }
-.planet-orbit-2 { animation: planetOrbit2 25s linear infinite; }
-.planet-orbit-3 { animation: planetOrbit3 30s linear infinite; }
-.planet-orbit-4 { animation: planetOrbit4 15s linear infinite; }
-.planet-orbit-5 { animation: planetOrbit5 35s linear infinite; }
-.planet-orbit-6 { animation: planetOrbit6 40s linear infinite; }
-
-/* Counter-rotation for planet content to keep them upright */
-.planet-content-1 { animation: planetContent1 20s linear infinite; }
-.planet-content-2 { animation: planetContent2 25s linear infinite; }
-.planet-content-3 { animation: planetContent3 30s linear infinite; }
-.planet-content-4 { animation: planetContent4 15s linear infinite; }
-.planet-content-5 { animation: planetContent5 35s linear infinite; }
-.planet-content-6 { animation: planetContent6 40s linear infinite; }
-
-@keyframes planetOrbit1 {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes planetOrbit2 {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
-}
-
-@keyframes planetOrbit3 {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes planetOrbit4 {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
-}
-
-@keyframes planetOrbit5 {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Counter-rotate content to keep planets and labels upright */
-@keyframes planetContent1 {
-  from { transform: translateX(-50%) rotate(0deg); }
-  to { transform: translateX(-50%) rotate(-360deg); }
-}
-
-@keyframes planetContent2 {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes planetContent3 {
-  from { transform: translateY(-50%) rotate(0deg); }
-  to { transform: translateY(-50%) rotate(-360deg); }
-}
-
-@keyframes planetContent4 {
-  from { transform: translateY(-50%) rotate(0deg); }
-  to { transform: translateY(-50%) rotate(360deg); }
-}
-
-@keyframes planetContent5 {
-  from { transform: translateX(-50%) rotate(0deg); }
-  to { transform: translateX(-50%) rotate(-360deg); }
-}
-
-@keyframes planetOrbit6 {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes planetContent6 {
-  from { transform: translateX(-50%) rotate(0deg); }
-  to { transform: translateX(-50%) rotate(-360deg); }
-}
